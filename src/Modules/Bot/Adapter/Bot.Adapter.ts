@@ -7,19 +7,19 @@ export class BotAdapter implements BotInterface.IBotAdapter {
 		this.bot = botInstance;
 	}
 
-	start(props: BotInterface.TTStartAd): Promise<void> {
+	start(props: BotInterface.TStartAd): Promise<void> {
 		return this.bot.start(props);
 	}
 
-	goMessage(): void {
-		this.bot.goMessage();
+	sandMessage(props: BotInterface.TSandMessageAd): void {
+		this.bot.sandMessage(props);
 	}
 
 	addCommandHandler(props: BotInterface.TAddCommandHandlerAd): void {
 		this.bot.addCommandHandler(props);
 	}
 
-	createCallbackCommand(props: BotInterface.TCreateBtnLinkCommandAd): void {
-		this.bot.createBtnLinkCommand(props);
+	createBtnLinkCommand(props: BotInterface.TCreateBtnLinkCommandAd) {
+		return this.bot.createBtnLinkCommand(props);
 	}
 }

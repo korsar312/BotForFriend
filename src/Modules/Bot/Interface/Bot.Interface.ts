@@ -2,33 +2,38 @@ import { Context } from "telegraf";
 
 export namespace BotInterface {
 	export interface IBot {
+		initCommand(): void;
 		startBot(): void;
 		send(): void;
 	}
 
 	export interface IBotAdapter {
-		start(props: TTStartAd): Promise<void>;
-		goMessage(): void;
+		start(props: TStartAd): Promise<void>;
+		sandMessage(props: TSandMessageAd): void;
 		addCommandHandler(props: TAddCommandHandlerAd): void;
-		createCallbackCommand(props: TCreateBtnLinkCommandAd): void;
+		createBtnLinkCommand(props: TCreateBtnLinkCommandAd): TCallbackMessage;
 	}
 
 	export interface IBotImplementation {
-		start(props: TTStartImp): Promise<void>;
-		goMessage(): void;
+		start(props: TStartImp): Promise<void>;
+		sandMessage(props: TSandMessageImp): void;
 		addCommandHandler(props: TAddCommandHandlerImp): void;
-		createBtnLinkCommand(props: TCreateBtnLinkCommandImp): void;
+		createBtnLinkCommand(props: TCreateBtnLinkCommandImp): TCallbackMessage;
 	}
+
+	export type TStartAd = TStartImp & {};
+	export type TSandMessageAd = TSandMessageImp & {};
+	export type TAddCommandHandlerAd = TAddCommandHandlerImp & { command: ECommand; fn: TCallbackMessage };
+	export type TCreateBtnLinkCommandAd = TCreateBtnLinkCommandImp & {};
+
+	export type TStartImp = { callback?: () => void };
+	export type TSandMessageImp = { text: string };
+	export type TAddCommandHandlerImp = { command: string; fn: TCallbackMessage };
+	export type TCreateBtnLinkCommandImp = { text: string; btnText: string; link: string };
 
 	export enum ECommand {
 		START = "start",
 	}
 
-	export type TTStartAd = TTStartImp & {};
-	export type TAddCommandHandlerAd = TAddCommandHandlerImp & { command: BotInterface.ECommand };
-	export type TCreateBtnLinkCommandAd = TCreateBtnLinkCommandImp & {};
-
-	export type TTStartImp = { callback?: () => void };
-	export type TAddCommandHandlerImp = { command: string; fn: (ctx: Context) => void };
-	export type TCreateBtnLinkCommandImp = { text: string; btnText: string; link: string };
+	type TCallbackMessage = (ctx: Context) => void;
 }

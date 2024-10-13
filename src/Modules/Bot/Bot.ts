@@ -7,12 +7,20 @@ export class Bot implements BotInterface.IBot {
 		this.adapter = adapter;
 	}
 
+	public initCommand() {
+		const btn = this.adapter.createBtnLinkCommand({
+			text: "тыкни",
+			btnText: "сюда",
+			link: "https://www.typescriptlang.org/docs/handbook/utility-types.html",
+		});
+		this.adapter.addCommandHandler({ command: BotInterface.ECommand.START, fn: btn });
+	}
+
 	public startBot() {
-		this.adapter.addCommandHandler({ command: BotInterface.ECommand.START, fn: () => "" });
-		this.adapter.start();
+		this.adapter.start({ callback: () => console.log(3456789) });
 	}
 
 	public send() {
-		this.adapter.goMessage();
+		this.adapter.sandMessage({ text: "" });
 	}
 }

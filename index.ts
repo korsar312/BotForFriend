@@ -5,6 +5,7 @@ class index {
 	private module = Init.execute({ botToken: Config.TELEGRAM_BOT_TOKEN });
 
 	public launchBot() {
+		this.module.bot.initCommand();
 		this.module.bot.startBot();
 	}
 }
