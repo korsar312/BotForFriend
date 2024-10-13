@@ -1,7 +1,7 @@
-import { BotTelegraf } from "./Modules/Bot/Core/Imp/BotTelegraf";
-import { Bot } from "./Modules/Bot/Core/Bot";
-import { BotAdapter } from "./Modules/Bot/Core/Adapter/BotAdapter";
-import { BotInterface } from "./Modules/Bot/Bot.interface";
+import { BotTelegraf } from "../Modules/Bot/Imp/Bot.Telegraf";
+import { Bot } from "../Modules/Bot/Bot";
+import { BotAdapter } from "../Modules/Bot/Adapter/Bot.Adapter";
+import { BotInterface } from "../Modules/Bot/Interface/Bot.Interface";
 
 interface IInit {
 	botToken: string;
@@ -9,17 +9,21 @@ interface IInit {
 
 interface IInitReturn {
 	bot: BotInterface.IBot;
-	payment: BotInterface.IBot;
-	table: BotInterface.IBot;
+	//payment: BotInterface.IBot;
+	//table: BotInterface.IBot;
 }
 
 export class Init {
 	static execute(initData: IInit): IInitReturn {
 		const bot = createBot(initData.botToken);
-		const payment = createPayment();
-		const table = createTable();
+		//const payment = createPayment();
+		//const table = createTable();
 
-		return { bot, payment, table };
+		return {
+			bot,
+			//payment,
+			//table
+		};
 	}
 }
 

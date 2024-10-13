@@ -1,12 +1,11 @@
-import { Config } from "./src/Config";
-import { Init } from "./src/Init";
+import { Config } from "./src/Config/Config";
+import { Init } from "./src/Config/Init";
 
 class index {
 	private module = Init.execute({ botToken: Config.TELEGRAM_BOT_TOKEN });
 
 	public launchBot() {
-		this.module.bot.go();
-		console.log("старт бота");
+		this.module.bot.startBot();
 	}
 }
 
