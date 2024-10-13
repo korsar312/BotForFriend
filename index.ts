@@ -1,16 +1,13 @@
-import { BotTelegraf } from './src/Modules/Bot/Core/BotTelegraf';
-import {Bot} from "./src/Modules/Bot/Bot";
-import {BotAdapter} from "./src/Modules/Bot/Core/BotAdapter";
+import { Config } from "./src/Config";
+import { Init } from "./src/Init";
 
 class index {
-    private bot = new Bot(new BotAdapter(new BotTelegraf('')));
+	private module = Init.execute({ botToken: Config.TELEGRAM_BOT_TOKEN });
 
-
-    public launchBot() {
-        this.bot.go();
-    }
-
+	public launchBot() {
+		this.module.bot.go();
+		console.log("старт бота");
+	}
 }
 
-
-new index().launchBot()
+new index().launchBot();
