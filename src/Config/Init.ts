@@ -11,8 +11,8 @@ interface IInit {
 }
 
 interface IInitReturn {
-	bot: BotInterface.IBotAdapter;
-	lang: LanguageInterface.ILanguageAdapter;
+	bot: BotInterface.IBot;
+	lang: LanguageInterface.ILanguage;
 	//payment: BotInterface.IBot;
 	//table: BotInterface.IBot;
 }

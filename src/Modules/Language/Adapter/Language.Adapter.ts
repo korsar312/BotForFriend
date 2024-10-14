@@ -1,13 +1,13 @@
 import { LanguageInterface } from "../Interface/Language.Interface";
 
-export class LanguageAdapter implements LanguageInterface.ILanguageAdapter {
-	private adapter: LanguageInterface.ILanguageImplementation;
+export class LanguageAdapter implements LanguageInterface.ILanguage {
+	private adapter: LanguageInterface.ILanguage;
 
-	constructor(instance: LanguageInterface.ILanguageImplementation) {
+	constructor(instance: LanguageInterface.ILanguage) {
 		this.adapter = instance;
 	}
 
-	getText(props: LanguageInterface.TGetTextAd): string {
+	getText(props: LanguageInterface.TGetText): string {
 		return this.adapter.getText(props);
 	}
 }
