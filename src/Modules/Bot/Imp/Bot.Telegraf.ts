@@ -12,10 +12,6 @@ export class BotTelegraf implements BotInterface.IBotImplementation {
 		return this.Implem.launch(props.callback);
 	}
 
-	public sandMessage(props: BotInterface.TSandMessageImp) {
-		return this.Implem.telegram.sendMessage(1, props.text);
-	}
-
 	public addCommandHandler(props: BotInterface.TAddCommandHandlerImp) {
 		this.Implem.command(props.command, props.fn);
 	}

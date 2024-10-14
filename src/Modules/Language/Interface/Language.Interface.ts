@@ -1,8 +1,4 @@
 export namespace LanguageInterface {
-	export interface ILanguage {
-		getText(props: TGetText): string;
-	}
-
 	export interface ILanguageAdapter {
 		getText(props: TGetTextAd): string;
 	}
@@ -11,7 +7,6 @@ export namespace LanguageInterface {
 		getText(props: TGetTextImp): string;
 	}
 
-	export type TGetText = TGetTextAd & {};
 	export type TGetTextAd = TGetTextImp & {};
 	export type TGetTextImp = { word: EWord };
 

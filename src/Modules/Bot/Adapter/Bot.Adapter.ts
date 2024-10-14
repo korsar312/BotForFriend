@@ -11,10 +11,6 @@ export class BotAdapter implements BotInterface.IBotAdapter {
 		return this.adapter.start(props);
 	}
 
-	sandMessage(props: BotInterface.TSandMessageAd): void {
-		this.adapter.sandMessage(props);
-	}
-
 	addCommandHandler(props: BotInterface.TAddCommandHandlerAd): void {
 		this.adapter.addCommandHandler(props);
 	}
