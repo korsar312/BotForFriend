@@ -1,25 +1,25 @@
 import { BotInterface } from "../Interface/Bot.Interface";
 
 export class BotAdapter implements BotInterface.IBotAdapter {
-	private bot: BotInterface.IBotImplementation;
+	private adapter: BotInterface.IBotImplementation;
 
-	constructor(botInstance: BotInterface.IBotImplementation) {
-		this.bot = botInstance;
+	constructor(instance: BotInterface.IBotImplementation) {
+		this.adapter = instance;
 	}
 
 	start(props: BotInterface.TStartAd): Promise<void> {
-		return this.bot.start(props);
+		return this.adapter.start(props);
 	}
 
 	sandMessage(props: BotInterface.TSandMessageAd): void {
-		this.bot.sandMessage(props);
+		this.adapter.sandMessage(props);
 	}
 
 	addCommandHandler(props: BotInterface.TAddCommandHandlerAd): void {
-		this.bot.addCommandHandler(props);
+		this.adapter.addCommandHandler(props);
 	}
 
 	createBtnLinkCommand(props: BotInterface.TCreateBtnLinkCommandAd) {
-		return this.bot.createBtnLinkCommand(props);
+		return this.adapter.createBtnLinkCommand(props);
 	}
 }
