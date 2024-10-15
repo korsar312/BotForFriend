@@ -1,4 +1,4 @@
-import { Context, Markup, Telegraf } from "telegraf";
+import { Markup, Telegraf } from "telegraf";
 import { BotInterface } from "../Interface/Bot.Interface";
 
 export class BotTelegraf implements BotInterface.IBotImplement {
@@ -16,10 +16,8 @@ export class BotTelegraf implements BotInterface.IBotImplement {
 		this.realization.command(props.command, props.fn);
 	}
 
-	public createBtnLinkCommand(props: BotInterface.TCreateBtnLinkCommandImplement) {
-		const btn = Markup.inlineKeyboard([[Markup.button.url(props.btnText, props.link)]]);
-
-		return (ctx: Context) => ctx.reply(props.text, btn);
+	public createBtnLink(props: BotInterface.TCreateBtnLinkImplement) {
+		return Markup.inlineKeyboard([[Markup.button.url(props.btnText, props.link)]]);
 	}
 
 	public getMessage(props: BotInterface.TGetMessageImplement) {

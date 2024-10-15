@@ -7,12 +7,12 @@ const { ECommand } = BotInterface;
 
 export class App extends Module {
 	public commandHandler() {
-		const btn = this.module.bot.createBtnLinkCommand({
+		const btn = this.module.bot.createBtnLink({
 			text: this.getText(EWord.START),
 			btnText: this.getText(EWord.START),
 			link: "https://www.typescriptlang.org/docs/handbook/utility-types.html",
 		});
-		this.module.bot.addCommandHandler({ command: ECommand.START, fn: btn });
+		this.module.bot.addCommandHandler({ command: ECommand.START, fn: (asd) => asd.reply("345", btn) });
 	}
 
 	public messageHandler() {

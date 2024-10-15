@@ -15,8 +15,8 @@ export class BotAdapter implements BotInterface.IBotAdapter {
 		this.implement.addCommandHandler(props);
 	}
 
-	createBtnLinkCommand(props: BotInterface.TCreateBtnLinkCommandAdapter) {
-		return this.implement.createBtnLinkCommand(props);
+	createBtnLink(props: BotInterface.TCreateBtnLinkAdapter) {
+		return this.implement.createBtnLink(props);
 	}
 
 	getMessage(props: BotInterface.TGetMessageAdapter) {
