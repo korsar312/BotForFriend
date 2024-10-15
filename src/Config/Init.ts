@@ -1,9 +1,9 @@
+import { BotInterface } from "../Modules/Bot/Interface/Bot.Interface";
 import { BotAdapter } from "../Modules/Bot/Adapter/Bot.Adapter";
 import { BotTelegraf } from "../Modules/Bot/Imp/Bot.Telegraf";
-import { BotInterface } from "../Modules/Bot/Interface/Bot.Interface";
+import { LanguageInterface } from "../Modules/Language/Interface/Language.Interface";
 import { LanguageAdapter } from "../Modules/Language/Adapter/Language.Adapter";
 import { LanguageImp } from "../Modules/Language/Imp/Language.Imp";
-import { LanguageInterface } from "../Modules/Language/Interface/Language.Interface";
 
 interface IInit {
 	botToken: string;
@@ -11,8 +11,8 @@ interface IInit {
 }
 
 interface IInitReturn {
-	bot: BotInterface.IBot;
-	lang: LanguageInterface.ILanguage;
+	bot: BotInterface.IBotAdapter;
+	lang: LanguageInterface.ILanguageAdapter;
 	//payment: BotInterface.IBot;
 	//table: BotInterface.IBot;
 }

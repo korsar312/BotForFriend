@@ -1,19 +1,34 @@
 import { Context } from "telegraf";
 
 export namespace BotInterface {
-	export interface IBot {
-		start(props: TStart): Promise<void>;
-		addCommandHandler(props: TAddCommandHandler): void;
-		createBtnLinkCommand(props: TCreateBtnLinkCommand): TCallbackMessage;
-		getMessage(props: TGetMessage): void;
-		sendMessage(props: TSendMessage): void;
+	interface IBot {
+		start(props: TStartAdapter): Promise<void>;
+		addCommandHandler(props: TAddCommandHandlerAdapter): void;
+		createBtnLinkCommand(props: TCreateBtnLinkCommandAdapter): TCallbackMessage;
+		getMessage(props: TGetMessageAdapter): void;
+		sendMessage(props: TSendMessageAdapter): void;
 	}
 
-	export type TStart = { callback?: () => void };
-	export type TAddCommandHandler = { command: ECommand; fn: TCallbackMessage };
-	export type TCreateBtnLinkCommand = { text: string; btnText: string; link: string };
-	export type TGetMessage = { fn: (text: string, id: number) => void };
-	export type TSendMessage = { id: number; text: string };
+	export interface IBotAdapter extends IBot {}
+	export interface IBotImplement extends IBot {}
+
+	type TStart = { callback?: () => void };
+	type TAddCommandHandler = { command: ECommand; fn: TCallbackMessage };
+	type TCreateBtnLinkCommand = { text: string; btnText: string; link: string };
+	type TGetMessage = { fn: (text: string, id: number) => void };
+	type TSendMessage = { id: number; text: string };
+
+	export type TStartAdapter = TStart;
+	export type TAddCommandHandlerAdapter = TAddCommandHandler;
+	export type TCreateBtnLinkCommandAdapter = TCreateBtnLinkCommand;
+	export type TGetMessageAdapter = TGetMessage;
+	export type TSendMessageAdapter = TSendMessage;
+
+	export type TStartImplement = TStart;
+	export type TAddCommandHandlerImplement = TAddCommandHandler;
+	export type TCreateBtnLinkCommandImplement = TCreateBtnLinkCommand;
+	export type TGetMessageImplement = TGetMessage;
+	export type TSendMessageImplement = TSendMessage;
 
 	export enum ECommand {
 		START = "start",

@@ -1,9 +1,15 @@
 export namespace LanguageInterface {
-	export interface ILanguage {
+	interface ILanguage {
 		getText(props: TGetText): string;
 	}
 
-	export type TGetText = { word: EWord };
+	export interface ILanguageAdapter extends ILanguage {}
+	export interface ILanguageImplement extends ILanguage {}
+
+	type TGetText = { word: EWord };
+
+	export type TGetTextAdapter = TGetText;
+	export type TGetTextImplement = TGetText;
 
 	export enum EWord {
 		START = "START",
