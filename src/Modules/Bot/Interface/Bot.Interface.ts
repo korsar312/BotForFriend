@@ -12,13 +12,13 @@ export namespace BotInterface {
 	export interface IBotAdapter extends IBotImplement {}
 
 	export type TStartImplement = { callback?: () => void };
-	export type TAddCommandHandlerImplement = { command: ECommand; fn: TCallbackMessage };
+	export type TAddCommandHandlerImplement = { command: ECommand; fn: (ctx: Context) => void };
 	export type TCreateBtnLinkImplement = { text: string; btnText: string; link: string };
 	export type TGetMessageImplement = { fn: (text: string, id: number) => void };
 	export type TSendMessageImplement = { id: number; text: string };
 
 	export type TStartAdapter = TStartImplement;
-	export type TAddCommandHandlerAdapter = TAddCommandHandlerImplement & { fn: TCallbackMessageAdapter };
+	export type TAddCommandHandlerAdapter = TAddCommandHandlerImplement & { fn: (ctx: ЕContextAdapter) => void };
 	export type TCreateBtnLinkAdapter = TCreateBtnLinkImplement;
 	export type TGetMessageAdapter = TGetMessageImplement;
 	export type TSendMessageAdapter = TSendMessageImplement;
@@ -26,9 +26,6 @@ export namespace BotInterface {
 	export enum ECommand {
 		START = "start",
 	}
-
-	type TCallbackMessage = (ctx: Context) => void;
-	type TCallbackMessageAdapter = (ctx: ЕContextAdapter) => void;
 
 	type ЕContextAdapter = {
 		reply: (text: string, options?: object) => Promise<void>;
