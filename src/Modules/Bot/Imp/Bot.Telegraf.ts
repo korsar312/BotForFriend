@@ -1,32 +1,39 @@
-import { Markup, Telegraf } from "telegraf";
+import { Markup, session, Telegraf } from "telegraf";
+import LocalSession from "telegraf-session-local";
+import { BotTelegrafInterface } from "./Bot.Telegraf.Interface";
 import { BotInterface } from "../Interface/Bot.Interface";
 
-export class BotTelegraf implements BotInterface.IBotImplement {
+export class BotTelegraf implements BotTelegrafInterface.IClass {
 	private realization: Telegraf;
 
 	constructor(token: string) {
 		this.realization = new Telegraf(token);
+		this.realization.use(session());
+		this.realization.use(
+			new LocalSession({
+				database: "user_db.json",
+				property: BotInterface.fieldSessionName,
+			}).middleware(),
+		);
 	}
 
-	public start(props: BotInterface.TStartImplement) {
+	public start(props: BotTelegrafInterface.TStart) {
 		return this.realization.launch(props.callback);
 	}
 
-	public addCommandHandler(props: BotInterface.TAddCommandHandlerImplement) {
+	public addCommandHandler(props: BotTelegrafInterface.TAddCommandHandler) {
 		this.realization.command(props.command, props.fn);
 	}
 
-	public createBtnLink(props: BotInterface.TCreateBtnLinkImplement) {
+	public createBtnLink(props: BotTelegrafInterface.TCreateBtnLink) {
 		return Markup.inlineKeyboard([[Markup.button.url(props.btnText, props.link)]]);
 	}
 
-	public getMessage(props: BotInterface.TGetMessageImplement) {
-		this.realization.on("text", (res) => {
-			props.fn(res.message.text, res.message.chat.id);
-		});
+	public getMessage(props: BotTelegrafInterface.TGetMessage) {
+		this.realization.on("text", props.fn);
 	}
 
-	public sendMessage(props: BotInterface.TSendMessageImplement) {
+	public sendMessage(props: BotTelegrafInterface.TSendMessage) {
 		this.realization.telegram.sendMessage(props.id, props.text);
 	}
 }

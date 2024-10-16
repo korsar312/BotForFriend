@@ -1,29 +1,30 @@
-import { BotInterface } from "../Interface/Bot.Interface";
+import { BotAdapterInterface } from "./Bot.Adapter.Interface";
+import { BotTelegrafInterface } from "../Imp/Bot.Telegraf.Interface";
 
-export class BotAdapter implements BotInterface.IBotAdapter {
-	private implement: BotInterface.IBotImplement;
+export class BotAdapter implements BotAdapterInterface.IClass {
+	private implement: BotTelegrafInterface.IClass;
 
-	constructor(instance: BotInterface.IBotImplement) {
+	constructor(instance: BotTelegrafInterface.IClass) {
 		this.implement = instance;
 	}
 
-	start(props: BotInterface.TStartAdapter) {
+	start(props: BotAdapterInterface.TStart) {
 		return this.implement.start(props);
 	}
 
-	addCommandHandler(props: BotInterface.TAddCommandHandlerAdapter) {
+	addCommandHandler(props: BotAdapterInterface.TAddCommandHandler) {
 		this.implement.addCommandHandler(props);
 	}
 
-	createBtnLink(props: BotInterface.TCreateBtnLinkAdapter) {
+	createBtnLink(props: BotAdapterInterface.TCreateBtnLink) {
 		return this.implement.createBtnLink(props);
 	}
 
-	getMessage(props: BotInterface.TGetMessageAdapter) {
+	getMessage(props: BotAdapterInterface.TGetMessage) {
 		this.implement.getMessage(props);
 	}
 
-	sendMessage(props: BotInterface.TSendMessageAdapter) {
+	sendMessage(props: BotAdapterInterface.TSendMessage) {
 		this.implement.sendMessage(props);
 	}
 }

@@ -1,9 +1,10 @@
-import { BotInterface } from "../Modules/Bot/Interface/Bot.Interface";
 import { BotAdapter } from "../Modules/Bot/Adapter/Bot.Adapter";
 import { BotTelegraf } from "../Modules/Bot/Imp/Bot.Telegraf";
 import { LanguageInterface } from "../Modules/Language/Interface/Language.Interface";
 import { LanguageAdapter } from "../Modules/Language/Adapter/Language.Adapter";
 import { LanguageImp } from "../Modules/Language/Imp/Language.Imp";
+import { BotAdapterInterface } from "../Modules/Bot/Adapter/Bot.Adapter.Interface";
+import { LanguageAdapterInterface } from "../Modules/Language/Adapter/Language.Adapter.Interface";
 
 interface IInit {
 	botToken: string;
@@ -11,8 +12,8 @@ interface IInit {
 }
 
 interface IInitReturn {
-	bot: BotInterface.IBotAdapter;
-	lang: LanguageInterface.ILanguageAdapter;
+	bot: BotAdapterInterface.IClass;
+	lang: LanguageAdapterInterface.IClass;
 	//payment: BotInterface.IBot;
 	//table: BotInterface.IBot;
 }
@@ -33,7 +34,7 @@ export class Init {
 	}
 }
 
-function createFn<T, S, C>(Domain: T, Adapter: new (domain: T) => S): S {
+function createFn<T, S>(Domain: T, Adapter: new (domain: T) => S): S {
 	const adapter = new Adapter(Domain);
 
 	return adapter;
