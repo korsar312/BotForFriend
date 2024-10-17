@@ -1,5 +1,5 @@
 import { CommandInterface } from "./Command.Interface";
-import { LanguageInterface } from "../Modules/Language/Interface/Language.Interface";
+import { LanguageInterface } from "../../Modules/Language/Interface/Language.Interface";
 
 export abstract class CommandBase implements CommandInterface.ICommand {
 	constructor(protected readonly module: CommandInterface.IClass) {}

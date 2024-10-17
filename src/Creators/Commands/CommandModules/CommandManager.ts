@@ -1,4 +1,4 @@
-import { CommandBase } from "./CommandBase";
+import { CommandBase } from "../CommandBase";
 
 export class CommandManager {
 	private commands: CommandBase[] = [];

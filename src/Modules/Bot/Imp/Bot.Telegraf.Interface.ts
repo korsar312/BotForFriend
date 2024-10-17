@@ -1,5 +1,4 @@
 import { Context, ContextText, NarrowedContext } from "telegraf";
-import LocalSessionOptions from "telegraf-session-local";
 import { Message, Update } from "telegraf/types";
 import { BotInterface } from "../Interface/Bot.Interface";
 
@@ -21,7 +20,7 @@ export namespace BotTelegrafInterface {
 
 declare module "telegraf" {
 	export interface Context {
-		[BotInterface.fieldSessionName]: LocalSessionOptions<unknown>;
+		[BotInterface.fieldSessionName]: Record<string, BotInterface.EStage>;
 	}
 
 	export type ContextText = NarrowedContext<Context<Update>, Update.MessageUpdate<Message.TextMessage>>;

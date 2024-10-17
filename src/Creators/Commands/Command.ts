@@ -1,5 +1,5 @@
-import { CommandManager } from "./CommandManager";
-import { StartCommand } from "./List/StartCommand";
+import { CommandManager } from "./CommandModules/CommandManager";
+import { StartCommand } from "./CommandList/StartCommand";
 import { CommandInterface } from "./Command.Interface";
 
 export class Command {

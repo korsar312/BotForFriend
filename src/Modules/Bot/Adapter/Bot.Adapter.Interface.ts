@@ -16,7 +16,8 @@ export namespace BotAdapterInterface {
 	export type TGetMessage = { fn: (ctx: IContextTextAdapter) => void };
 	export type TSendMessage = { id: number; text: string };
 
-	//тут по хорошему бы сделать класс адаптер, но видит бог на сколько мне лень это делать
+	//TODO тут по хорошему бы сделать класс адаптер, но видит бог на сколько мне лень это делать сейчас
 	export interface IContextAdapter extends Context {}
+
 	export interface IContextTextAdapter extends ContextText {}
 }
