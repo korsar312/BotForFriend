@@ -1,4 +1,4 @@
-import { Markup, session, Telegraf } from "telegraf";
+import { Markup, Telegraf } from "telegraf";
 import LocalSession from "telegraf-session-local";
 import { BotTelegrafInterface } from "./Bot.Telegraf.Interface";
 import { BotInterface } from "../Interface/Bot.Interface";
@@ -8,7 +8,6 @@ export class BotTelegraf implements BotTelegrafInterface.IClass {
 
 	constructor(token: string) {
 		this.realization = new Telegraf(token);
-		this.realization.use(session());
 		this.realization.use(
 			new LocalSession({
 				database: "user_db.json",
@@ -34,6 +33,7 @@ export class BotTelegraf implements BotTelegrafInterface.IClass {
 	}
 
 	public sendMessage(props: BotTelegrafInterface.TSendMessage) {
-		this.realization.telegram.sendMessage(props.id, props.text);
+		const asd = this.createBtnLink({ link: "", btnText: "", text: "" });
+		this.realization.telegram.sendMessage(props.id, props.text, props.extra);
 	}
 }

@@ -14,22 +14,16 @@ interface IInit {
 interface IInitReturn {
 	bot: BotAdapterInterface.IClass;
 	lang: LanguageAdapterInterface.IClass;
-	//payment: BotInterface.IBot;
-	//table: BotInterface.IBot;
 }
 
 export class Init {
 	static execute(initData: IInit): IInitReturn {
 		const bot = createBot(initData.botToken);
 		const lang = createLang(initData.dictionary);
-		//const payment = createPayment();
-		//const table = createTable();
 
 		return {
 			bot,
 			lang,
-			//payment,
-			//table
 		};
 	}
 }
@@ -46,12 +40,4 @@ function createBot(token: string) {
 
 function createLang(dict: LanguageInterface.TWord) {
 	return createFn(new LanguageImp(dict), LanguageAdapter);
-}
-
-function createPayment() {
-	return createFn(new BotTelegraf("token"), BotAdapter);
-}
-
-function createTable() {
-	return createFn(new BotTelegraf("token"), BotAdapter);
 }

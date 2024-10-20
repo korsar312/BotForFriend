@@ -1,6 +1,7 @@
 import { Context, ContextText, NarrowedContext } from "telegraf";
 import { Message, Update } from "telegraf/types";
 import { BotInterface } from "../Interface/Bot.Interface";
+import { ExtraReplyMessage } from "telegraf/typings/telegram-types";
 
 export namespace BotTelegrafInterface {
 	export interface IClass {
@@ -15,7 +16,7 @@ export namespace BotTelegrafInterface {
 	export type TAddCommandHandler = { command: string; fn: (ctx: Context) => void };
 	export type TCreateBtnLink = { text: string; btnText: string; link: string };
 	export type TGetMessage = { fn: (ctx: ContextText) => void };
-	export type TSendMessage = { id: number; text: string };
+	export type TSendMessage = { id: number; text: string; extra: ExtraReplyMessage };
 }
 
 declare module "telegraf" {
