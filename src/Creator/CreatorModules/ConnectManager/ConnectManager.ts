@@ -7,7 +7,7 @@ export class ConnectManager<T extends string, K> implements ConnectManagerInterf
 		this.connectList.set(stage, fn);
 	}
 
-	public getConnect(stage: T): K {
+	public getConnect(stage: T) {
 		const fn = this.connectList.get(stage);
 		if (!fn) throw new Error(`Нет состояния для ${stage}`);
 

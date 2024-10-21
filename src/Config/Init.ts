@@ -11,7 +11,7 @@ interface IInit {
 	dictionary: LanguageInterface.TWord;
 }
 
-interface IInitReturn {
+export interface IInitReturn {
 	bot: BotAdapterInterface.IClass;
 	lang: LanguageAdapterInterface.IClass;
 }
