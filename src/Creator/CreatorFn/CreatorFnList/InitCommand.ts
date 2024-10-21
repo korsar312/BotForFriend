@@ -1,7 +1,7 @@
 import { CreatorFnBase } from "../CreatorFnBase";
 import { CreatorInterface } from "../../Creator.Interface";
 import { CommandStart } from "../../CreatorList/Command/CommandList/CommandStart";
-import { BotInterface } from "../../../Modules/Bot/Interface/Bot.Interface";
+import { BotInterface } from "../../../Modules/ModuleList/Bot/Interface/Bot.Interface";
 
 export class InitCommand extends CreatorFnBase implements CreatorInterface.IBase {
 	private init() {

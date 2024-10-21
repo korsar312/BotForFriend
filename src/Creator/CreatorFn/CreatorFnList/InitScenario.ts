@@ -1,7 +1,7 @@
 import { ScenarioFinish } from "../../CreatorList/Scenario/ScenarioList/ScenarioFinish";
-import { BotInterface } from "../../../Modules/Bot/Interface/Bot.Interface";
 import { CreatorFnBase } from "../CreatorFnBase";
 import { CreatorInterface } from "../../Creator.Interface";
+import { BotInterface } from "../../../Modules/ModuleList/Bot/Interface/Bot.Interface";
 
 export class InitScenario extends CreatorFnBase implements CreatorInterface.IBase {
 	private init() {

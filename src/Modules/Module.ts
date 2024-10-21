@@ -1,10 +1,16 @@
-import { Init } from "../Config/Init";
 import { Config } from "../Config/Config";
 import { Dict } from "../Config/Dict";
+import { ModuleChooser } from "./ModuleList/ModuleChooser";
+import { ModuleInterface } from "./Module.Interface";
 
 export class Module {
-	protected module = Init.execute({
-		botToken: Config.TELEGRAM_BOT_TOKEN,
-		dictionary: Dict,
+	private chooser = new ModuleChooser({
+		token: Config.TELEGRAM_BOT_TOKEN,
+		dict: Dict,
 	});
+
+	protected module: ModuleInterface.IInitReturn = {
+		lang: this.chooser.execute("lang"),
+		bot: this.chooser.execute("bot"),
+	};
 }

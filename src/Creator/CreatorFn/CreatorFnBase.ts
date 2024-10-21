@@ -1,6 +1,6 @@
 import { CreatorInterface } from "../Creator.Interface";
-import { BotInterface } from "../../Modules/Bot/Interface/Bot.Interface";
-import { BotAdapterInterface } from "../../Modules/Bot/Adapter/Bot.Adapter.Interface";
+import { BotInterface } from "../../Modules/ModuleList/Bot/Interface/Bot.Interface";
+import { BotAdapterInterface } from "../../Modules/ModuleList/Bot/Adapter/Bot.Adapter.Interface";
 
 export class CreatorFnBase {
 	constructor(
