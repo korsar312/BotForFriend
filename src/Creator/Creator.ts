@@ -1,43 +1,57 @@
 import { CreatorInterface } from "./Creator.Interface";
-import { AllExecute } from "./CreatorModules/AllExecute";
 import { ScenarioFinish } from "./CreatorList/Scenario/ScenarioList/ScenarioFinish";
-import { ConnectManager } from "./CreatorModules/ConnectManager";
 import { BotInterface } from "../Modules/Bot/Interface/Bot.Interface";
 import { BotAdapterInterface } from "../Modules/Bot/Adapter/Bot.Adapter.Interface";
+import { CommandStart } from "./CreatorList/Command/CommandList/CommandStart";
+import { LanguageInterface } from "../Modules/Language/Interface/Language.Interface";
 
 export class Creator {
-	private readonly modules: CreatorInterface.ICreatorModule = {
-		regManager: new AllExecute(),
-		connectScenario: new ConnectManager(),
-	};
-
-	constructor(private readonly module: CreatorInterface.IClass) {
+	constructor(
+		private readonly module: CreatorInterface.IClass,
+		private readonly plugin: CreatorInterface.IPlugin,
+	) {
 		this.initialize();
 	}
 
 	private initialize(): void {
-		this.modules.connectScenario.setConnect(BotInterface.EStage.FINISH, new ScenarioFinish(this.module));
-		this.modules.connectScenario.setConnect(BotInterface.EStage.PAYMENT_USER, new ScenarioFinish(this.module));
-		this.modules.connectScenario.setConnect(BotInterface.EStage.GET_USER_DATA, new ScenarioFinish(this.module));
+		this.setupScenarios();
+		this.setupCommand();
+	}
 
-		this.module.bot.addCommandHandler({
-			command: BotInterface.ECommand.START,
-			fn: this.handling(),
-		});
+	private setupScenarios(): void {
+		const { connectScenario } = this.plugin;
+
+		connectScenario.setConnect(BotInterface.EStage.FINISH, new ScenarioFinish(this.module));
+		connectScenario.setConnect(BotInterface.EStage.PAYMENT_USER, new ScenarioFinish(this.module));
+		connectScenario.setConnect(BotInterface.EStage.GET_USER_DATA, new ScenarioFinish(this.module));
 
 		this.module.bot.getMessage({ fn: this.handling() });
 	}
 
-	private handling = () => {
-		const connectScenario = this.modules.connectScenario;
+	private setupCommand(): void {
+		const { regManager } = this.plugin;
+
+		regManager.addCommand(new CommandStart(this.module, this.handling(BotInterface.EStage.FINISH)));
+
+		regManager.registerCommands();
+	}
+
+	private handling = (stageInit?: BotInterface.EStage) => {
+		const connectScenario = this.plugin.connectScenario;
 
 		return (ctx: BotAdapterInterface.IContextAdapter) => {
 			const id = ctx.chat?.id || 0;
-			const stage = ctx.sessions[id];
+			const stage = stageInit || ctx.sessions[id];
 
 			connectScenario.getConnect(stage).execute(id);
 		};
 	};
 
-	public invoke() {}
+	public invoke() {
+		this.module.bot.start({
+			callback: () => {
+				console.log(this.module.lang.getText({ word: LanguageInterface.EWord.START }));
+			},
+		});
+	}
 }
