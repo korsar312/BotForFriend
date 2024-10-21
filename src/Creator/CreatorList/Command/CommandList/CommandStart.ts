@@ -10,6 +10,7 @@ export class CommandStart extends CommandBase {
 	) {
 		super(modules);
 	}
+
 	public execute() {
 		this.module.bot.addCommandHandler({ command: BotInterface.ECommand.START, fn: this.fn });
 	}
