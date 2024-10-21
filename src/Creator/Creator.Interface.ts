@@ -7,6 +7,12 @@ import { ScenarioBase } from "./CreatorList/Scenario/ScenarioBase";
 import { CommandBase } from "./CreatorList/Command/CommandBase";
 
 export namespace CreatorInterface {
+	export interface ICreator extends IBase {
+		commandInit: CreatorInterface.IBase;
+		scenarioInit: CreatorInterface.IBase;
+		startInit: CreatorInterface.IBase;
+	}
+
 	export interface IClass {
 		bot: BotAdapterInterface.IClass;
 		lang: LanguageAdapterInterface.IClass;
